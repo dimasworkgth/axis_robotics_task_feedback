@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>AXIS Task Room</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="ambient"></div>
+  <header class="shell hero mini-hero">
+    <section class="hero-card">
+      <div class="brand-row">
+        <img class="brand-logo" src="axis-logo.png" alt="AXIS Robotics" />
+        <span class="brand-chip" id="roomStatus">Loading</span>
+      </div>
+      <h1>Task Room</h1>
+      <p class="lead" id="roomSubtext">Feedback is locked to the opened task automatically.</p>
+      <div class="actions">
+        <a class="btn" href="index.html" id="backToTasks">Back to Tasks</a>
+      </div>
+    </section>
+  </header>
+
+  <main class="shell room-grid">
+    <section class="room-left">
+      <article class="card panel" id="taskPanel"></article>
+      <article class="card panel" id="feedbackPanel"></article>
+    </section>
+
+    <aside class="room-right">
+      <article class="card panel" id="formPanel"></article>
+    </aside>
+  </main>
+
+  <footer class="shell site-footer">
+    <span>Built by</span>
+    <a href="https://t.me/NPCKRIPTO" target="_blank" rel="noopener noreferrer">NPCCRYPTO</a>
+  </footer>
+
+  <script type="module" src="task.js"></script>
+</body>
+</html>

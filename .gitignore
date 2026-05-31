@@ -1,0 +1,6 @@
+.env
+.local-feedback
+node_modules
+.DS_Store
+package-lock.json
+*.zip

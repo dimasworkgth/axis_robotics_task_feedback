@@ -1,76 +1,60 @@
 <!doctype html>
-<html lang="id">
+<html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>AXIS Task Monitor</title>
-  <style>
-    :root{--g:#00FF59;--bg:#050505;--w:#fff;--m:rgba(255,255,255,.68);--m2:rgba(255,255,255,.45);--l:rgba(255,255,255,.12);--gl:rgba(0,255,89,.35);--r:#ff5e5e;--y:#ffd166}
-    *{box-sizing:border-box;margin:0;padding:0}body{font-family:Arial,Helvetica,sans-serif;background:radial-gradient(circle at top,rgba(0,255,89,.12),transparent 34%),var(--bg);color:var(--w)}
-    .wrap{width:min(1180px,calc(100% - 22px));margin:auto;padding:16px 0 30px;display:grid;gap:12px}.top{display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--l);padding-bottom:12px;gap:12px}.brand{display:flex;gap:10px;align-items:center}.mark{width:34px;height:34px;border:1px solid var(--gl);border-radius:11px;position:relative}.mark:before,.mark:after{content:"";position:absolute;left:7px;top:15px;width:20px;height:3px;background:var(--g);border-radius:99px}.mark:before{transform:rotate(38deg)}.mark:after{transform:rotate(-38deg)}h1{font-size:1.35rem;letter-spacing:.04em}.sub{color:var(--m);font-size:.82rem;margin-top:4px}.pill{border:1px solid var(--gl);color:var(--g);border-radius:999px;padding:8px 10px;font-size:.76rem;font-weight:900}
-    .card{background:linear-gradient(180deg,rgba(18,18,18,.98),rgba(7,7,7,.98));border:1px solid var(--l);border-radius:18px;overflow:hidden}.body{padding:13px}.toolbar{display:grid;grid-template-columns:1fr auto auto;gap:8px}.inp,.sel{border:1px solid var(--l);background:rgba(255,255,255,.055);color:var(--w);border-radius:12px;padding:10px 11px;outline:none}.sel option{color:#111}.btn{border:0;background:var(--g);color:#000;font-weight:900;border-radius:12px;padding:10px 12px;cursor:pointer}
-    .grid{display:grid;grid-template-columns:390px 1fr;gap:12px}.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}.stat{border:1px solid var(--l);border-radius:13px;padding:10px;background:rgba(255,255,255,.045)}.stat b{display:block;color:var(--g);font-size:1.3rem}.stat span{color:var(--m);font-size:.75rem}.head{display:flex;justify-content:space-between;border-bottom:1px solid var(--l);padding:11px 13px}.label{color:var(--g);font-size:.7rem;letter-spacing:.13em;text-transform:uppercase;font-weight:900}.count{color:var(--m2);font-size:.76rem}.list{display:grid;gap:8px;max-height:620px;overflow:auto;padding-right:2px}.task{width:100%;text-align:left;border:1px solid var(--l);background:rgba(255,255,255,.045);color:var(--w);border-radius:14px;padding:11px;cursor:pointer;display:grid;grid-template-columns:70px 1fr;gap:10px}.task:hover,.task.active{border-color:var(--gl);background:rgba(0,255,89,.075)}.thumb{width:70px;height:58px;object-fit:cover;border-radius:11px;border:1px solid var(--l);background:#000}.tname{font-weight:900;font-size:.9rem;line-height:1.2}.friendly{color:var(--g);font-weight:900;font-size:.8rem;margin:5px 0;line-height:1.3}.desc{color:var(--m);font-size:.75rem;line-height:1.35;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}.badge{float:right;border:1px solid var(--gl);color:var(--g);border-radius:999px;font-size:.66rem;padding:4px 7px;font-weight:900}.badge.red{color:var(--r);border-color:rgba(255,94,94,.45)}.badge.yellow{color:var(--y);border-color:rgba(255,209,102,.45)}.bar{height:8px;background:rgba(255,255,255,.08);border-radius:999px;overflow:hidden;margin-top:8px}.fill{height:100%;background:var(--g)}.meta{display:flex;justify-content:space-between;color:var(--m2);font-size:.72rem;margin-top:7px}
-    .titleIndo{font-size:clamp(2.1rem,6vw,4.4rem);line-height:.92;letter-spacing:-.07em;color:var(--g);font-weight:900}.original{color:var(--m2);font-size:.9rem;margin-top:8px;line-height:1.35}.tags{display:flex;flex-wrap:wrap;gap:7px;margin-top:12px}.tag{border:1px solid var(--gl);color:var(--g);border-radius:999px;padding:7px 9px;font-size:.76rem;font-weight:900}.detail{display:grid;gap:12px}.box{border:1px solid var(--l);background:rgba(255,255,255,.04);border-radius:18px;padding:16px}.box h3{font-size:1.08rem;margin-bottom:11px;color:var(--g)}ol,ul{padding-left:22px;display:grid;gap:10px}li,.box p{color:var(--m);line-height:1.5;font-size:1rem}.success{border-color:rgba(0,255,89,.25);background:linear-gradient(145deg,rgba(0,255,89,.07),transparent 50%),rgba(255,255,255,.04)}.err{border-color:rgba(255,94,94,.45);background:rgba(255,94,94,.07)}.hidden{display:none!important}.empty{border:1px dashed var(--l);border-radius:12px;color:var(--m2);padding:12px;font-size:.86rem}.slotText{color:var(--m);font-size:.92rem;line-height:1.5}.warnline{color:var(--y);font-size:.82rem;margin-top:8px;line-height:1.4}
-    @media(max-width:900px){.grid,.toolbar{grid-template-columns:1fr}.stats{grid-template-columns:1fr}.top{align-items:flex-start;flex-direction:column}.list{max-height:none}}@media(max-width:520px){.task{grid-template-columns:1fr}.thumb{width:100%;height:150px}}
-  </style>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>AXIS Task Feedback Board</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-<div class="wrap">
-  <header class="top"><div class="brand"><div class="mark"></div><div><h1>AXIS TASK MONITOR</h1><div class="sub">Fokus task aktif dan langkah penyelesaian dengan sistem terjemahan.</div></div></div><div id="status" class="pill">SYNC...</div></header>
+  <div class="ambient"></div>
+  <header class="shell hero">
+    <section class="hero-card">
+      <div class="brand-row">
+        <img class="brand-logo" src="axis-logo.png" alt="AXIS Robotics" />
+        <span class="brand-chip"></span>
+      </div>
+      <h1>Task Feedback Board</h1>
+      <p class="lead"></p>
+      <div class="actions">
+        <button class="btn primary" id="refreshBtn">Sync New Tasks</button>
+      </div>
+    </section>
+  </header>
 
-  <section class="card"><div class="body toolbar"><input id="search" class="inp" placeholder="Cari task aktif"><select id="refresh" class="sel"><option value="5" selected>Refresh 5 detik</option><option value="10">Refresh 10 detik</option><option value="30">Refresh 30 detik</option><option value="0">Off</option></select><button id="refreshBtn" class="btn">REFRESH</button></div></section>
-  <section id="error" class="card err hidden"><div class="body"><b>Sync gagal</b><p id="errorText" style="margin-top:7px;color:var(--m)"></p></div></section>
-  <section class="card"><div class="body stats"><div class="stat"><b id="activeN">0</b><span>task aktif</span></div><div class="stat"><b id="urgentN">0</b><span>hampir habis</span></div><div class="stat"><b id="totalN">0</b><span>terbaca dari AXIS</span></div></div></section>
+  <main class="shell board-wrap">
+    <section class="card main-card">
+      <div class="toolbar">
+        <div>
+          <span class="section-kicker">Live Tasks</span>
+          <h2>Today Tasks</h2>
+          <p class="muted" id="todayCount">Loading live tasks...</p>
+        </div>
+        <label class="field small-field">
+          <span>Search</span>
+          <input id="searchInput" placeholder="Search task title..." />
+        </label>
+      </div>
+      <section class="task-grid" id="todayGrid"></section>
+    </section>
 
-  <section class="grid">
-    <aside class="card">
-      <div class="head"><div class="label">Task Aktif</div><span id="activeLabel" class="count"></span></div>
-      <div class="body"><div id="activeList" class="list"></div></div>
-    </aside>
+    <section class="card main-card archive-card">
+      <div class="toolbar compact-toolbar">
+        <div>
+          <span class="section-kicker">Saved Tasks</span>
+          <h2>Saved Tasks</h2>
+          <p class="muted" id="sevenDayCount">Tasks automatically move here after 24 hours or when they disappear from the live API.</p>
+        </div>
+      </div>
+      <section class="task-grid" id="sevenDayGrid"></section>
+    </section>
+  </main>
 
-    <main class="detail">
-      <section class="card"><div class="body">
-        <div class="label">Instruksi yang harus dilakukan</div>
-        <h2 id="titleIndo" class="titleIndo">Menunggu task.</h2>
-        <p id="original" class="original"></p>
-        <p id="translateWarn" class="warnline hidden"></p>
-        <div id="tags" class="tags"></div>
-      </div></section>
+  <footer class="shell site-footer">
+    <span>Built by</span>
+    <a href="https://t.me/NPCKRIPTO" target="_blank" rel="noopener noreferrer">NPCCRYPTO</a>
+  </footer>
 
-      <section class="box">
-        <h3>Langkah penyelesaian</h3>
-        <ol id="tutorial"></ol>
-      </section>
-
-      <section class="box success">
-        <h3>Kondisi sukses</h3>
-        <ul id="success"></ul>
-      </section>
-
-      <section class="box">
-        <h3>Status slot</h3>
-        <p id="slot" class="slotText">Belum ada task.</p>
-      </section>
-    </main>
-  </section>
-</div>
-<script>
-let tasks=[],selected=null,timer=null;
-const $=id=>document.getElementById(id);
-function esc(v){return String(v??"").replace(/[&<>'"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;","'":"&#039;",'"':"&quot;"}[c]))}
-function remaining(t){return Math.max(Number(t.slot||0)-Number(t.slot_completed||0),0)}
-function progress(t){return t.slot?Math.max(0,Math.min(100,Number(t.slot_completed||0)/Number(t.slot||1)*100)):Number(t.progress||0)}
-function isUrgent(t){return t.slot ? remaining(t)/Number(t.slot)<=.15 : false}
-function badge(t){let p=t.slot?(remaining(t)/t.slot)*100:100;if(p<=5)return '<span class="badge red">KRITIS</span>';if(p<=15)return '<span class="badge yellow">HAMPIR</span>';return '<span class="badge">AKTIF</span>'}
-function titleId(t){return t.title_id || t.name || "Task"}
-function descId(t){return t.description_id || t.description || ""}
-function stepsId(t){return Array.isArray(t.steps_id)&&t.steps_id.length?t.steps_id:[descId(t)]}
-function card(t){let p=progress(t),rem=remaining(t),img=t.thumbnail||"";return `<button class="task ${selected==t.id?'active':''}" data-id="${esc(t.id)}">${img?`<img class="thumb" src="${esc(img)}">`:`<div class="thumb"></div>`}<div><div class="tname">${esc(t.name)} ${badge(t)}</div><div class="friendly">${esc(titleId(t))}</div><div class="desc">${esc(descId(t))}</div><div class="bar"><div class="fill" style="width:${p}%;background:${isUrgent(t)?'var(--y)':'var(--g)'}"></div></div><div class="meta"><span>${rem}/${t.slot} slot</span><span>${Math.round(p)}%</span></div></div></button>`}
-function render(){let q=$("search").value.toLowerCase().trim();let active=tasks;if(q)active=active.filter(t=>(`${t.name} ${t.description} ${titleId(t)} ${descId(t)}`).toLowerCase().includes(q));let urgent=active.filter(isUrgent);$("activeN").textContent=active.length;$("urgentN").textContent=urgent.length;$("totalN").textContent=tasks.length;$("activeLabel").textContent=`${active.length} task`;$("activeList").innerHTML=active.length?active.map(card).join(""):`<div class="empty">Tidak ada task aktif.</div>`;document.querySelectorAll(".task").forEach(b=>b.onclick=()=>select(Number(b.dataset.id)));if(!active.some(t=>t.id==selected)){if(active[0])select(active[0].id,false)}}
-function select(id,rerender=true){selected=id;let t=tasks.find(x=>x.id==id);if(!t)return;if(rerender)render();let rem=remaining(t),p=progress(t),stepList=stepsId(t),success=descId(t);$("titleIndo").textContent=titleId(t);$("original").textContent=`Judul asli: ${t.name}`;$("tutorial").innerHTML=stepList.map(x=>`<li>${esc(x)}</li>`).join("");$("success").innerHTML=`<li>${esc(success)}</li><li>Task dianggap selesai saat hasil di simulator sudah sesuai instruksi dan berhasil disubmit di AXIS.</li>`;$("slot").textContent=isUrgent(t)?`Hampir habis: tersisa ${rem} dari ${t.slot} slot. Progress ${Math.round(p)}%.`:`Aktif: tersisa ${rem} dari ${t.slot} slot. Progress ${Math.round(p)}%.`;$("tags").innerHTML=[`ID ${t.id}`,`${t.difficulty_stars||"-"}★`,`${t.success_rate??"-"}% pass`,t.translation?.provider?`translate: ${t.translation.provider}`:""].filter(Boolean).map(x=>`<span class="tag">${esc(x)}</span>`).join("");if(t.translation&&!t.translation.ok){$("translateWarn").classList.remove("hidden");$("translateWarn").textContent="Terjemahan mesin sedang fallback. Pastikan service LibreTranslate sudah siap."; }else{$("translateWarn").classList.add("hidden");$("translateWarn").textContent=""}}
-async function sync(){try{$("error").classList.add("hidden");$("status").textContent="SYNCING...";let r=await fetch(`/api/axis/tasks?sort_order=desc&status=active&search=${encodeURIComponent($("search").value)}&page=1&per_page=9&all_pages=1&translate=1`,{cache:"no-store"});let j=await r.json();if(!r.ok)throw Error(j.error||`HTTP ${r.status}`);tasks=Array.isArray(j.tasks)?j.tasks:[];$("status").textContent=`LIVE · ${new Date().toLocaleTimeString()} · ${tasks.length} aktif`;render();if(!selected&&tasks.length)select(tasks[0].id,false)}catch(e){$("status").textContent="SYNC GAGAL";$("error").classList.remove("hidden");$("errorText").textContent=e.message}}
-function setup(){if(timer)clearInterval(timer);let s=Number($("refresh").value);if(s)timer=setInterval(sync,s*1000)}
-$("refreshBtn").onclick=sync;$("refresh").onchange=setup;$("search").oninput=()=>{clearTimeout(window.__s);window.__s=setTimeout(sync,400)};setup();sync();
-</script>
+  <script type="module" src="index.js"></script>
 </body>
 </html>

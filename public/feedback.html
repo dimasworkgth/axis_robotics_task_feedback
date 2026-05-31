@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>AXIS Task Feedback</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="ambient"></div>
+  <header class="shell hero mini-hero">
+    <section class="hero-card">
+      <div class="brand-row">
+        <img class="brand-logo" src="axis-logo.png" alt="AXIS Robotics" />
+        <span class="brand-chip" id="statusText">Loading</span>
+      </div>
+      <h1>All Feedback</h1>
+      <p class="lead"></p>
+      <div class="actions">
+        <a class="btn" href="task.html" id="backToTask">Back to Task Room</a>
+        <a class="btn" href="index.html" id="backToTasks">Back to Tasks</a>
+      </div>
+    </section>
+  </header>
+
+  <main class="shell card main-card">
+    <div class="section-head">
+      <div>
+        <span class="section-kicker">Community notes</span>
+        <h2>Feedback List</h2>
+        <p class="muted"><span id="totalCount">0</span> feedback items collected for this task.</p>
+      </div>
+    </div>
+    <section class="feedback-list" id="feedbackList"></section>
+  </main>
+
+  <footer class="shell site-footer">
+    <span>Built by</span>
+    <a href="https://t.me/NPCKRIPTO" target="_blank" rel="noopener noreferrer">NPCCRYPTO</a>
+  </footer>
+
+  <script type="module" src="feedback.js"></script>
+</body>
+</html>

@@ -1,0 +1,12 @@
+{
+  "name": "AXIS Feedback Netlify",
+  "image": "mcr.microsoft.com/devcontainers/javascript-node:20",
+  "forwardPorts": [8888],
+  "portsAttributes": {
+    "8888": {
+      "label": "AXIS Feedback Preview",
+      "onAutoForward": "openBrowser"
+    }
+  },
+  "postCreateCommand": "npm install && cp -n .env.example .env"
+}
