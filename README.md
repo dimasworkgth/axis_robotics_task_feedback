@@ -1,117 +1,171 @@
-# AXIS Task Feedback Board V8
+# AXIS Task Feedback Board
 
-Netlify-native public feedback board for AXIS tasks. It can be tested in GitHub Codespaces and deployed to Netlify without a VPS.
+A public feedback layer for AXIS Robotics tasks.
 
-## What changed in V8
+This project is designed to help contributors give structured feedback directly on each AXIS task, without using a generic feedback form or manually choosing which task the feedback belongs to.
 
-- Uses the correct horizontal AXIS Robotics logo supplied by the user.
-- Public UI is separated from admin. The public site has no admin button.
-- Tasks are split into two sections:
-  - **Today Tasks**: live AXIS tasks collected within the current 24-hour window.
-  - **7D Tasks**: saved tasks after 24 hours or after the task disappears from the live AXIS API.
-- Feedback form and feedback preview remain separated.
-- Footer credit: Built by NPCCRYPTO, linked to Telegram DM.
-- Refined 2026-style dark UI with calmer contrast, better spacing, and stronger visual hierarchy.
+## Why This Matters
 
-## How task collection works
+AXIS tasks are dynamic. A task can appear, get completed, become full, or disappear from the live task list.
 
-1. Click **Sync New Tasks**.
-2. The function reads live tasks from the AXIS API.
-3. Every task identity is saved into a local/Netlify catalog.
-4. If a task later disappears from the AXIS API, it stays in the board as a saved task.
-5. Today Tasks move to 7D Tasks after 24 hours.
+Without a dedicated feedback layer, useful contributor feedback can easily be lost because:
 
-AXIS usually publishes tasks around 7 PM WIB. If a task appears early/randomly, the board still collects it and keeps it in Today Tasks for 24 hours before moving it to 7D Tasks.
+* Contributors may not know where to report unclear task instructions
+* Feedback can become scattered across chats, comments, or social platforms
+* The team may not know which task a specific feedback message refers to
+* Completed or disappeared tasks may no longer have an accessible place for review
+* Repeated issues across tasks are harder to track and improve
 
-## Test in Codespaces
+This board helps turn task feedback into a structured and reviewable system.
 
-```bash
-cp .env.example .env
-npm run dev
-```
+## Core Idea
 
-Open port `8888` from the Codespaces **PORTS** tab.
+Each task gets its own feedback room.
 
-## Real AXIS API mode
+When a user opens a task, the feedback form is automatically connected to that task. The user only needs to enter:
 
-Edit `.env`:
+* Name or username
+* Feedback category
+* Message
 
-```env
-USE_LOCAL_STORAGE=1
-USE_MOCK_AXIS=0
-AXIS_API_URL=https://hub.axisrobotics.ai/api/tasks
-AXIS_COOKIE=
-MAX_AXIS_PAGES=6
-ADMIN_KEY=change-this-admin-key
-BLOCK_DUPLICATE_BY_IP=0
-```
+The system handles the task connection in the background.
 
-Restart:
+Users do not need to select the task manually.
 
-```bash
-CTRL + C
-npm run dev
-```
+## How It Works
 
-Then click **Sync New Tasks**.
+The board reads task information from the AXIS task source and stores the task identity in its own catalog.
 
-## Demo mode
+A saved task identity may include:
 
-If you want dummy data only:
+* Task ID
+* Task title
+* Task description
+* Task progress or slot information
+* Task source metadata
+* Collection time
 
-```env
-USE_MOCK_AXIS=0
-```
+Once the task identity is saved, the board can keep a feedback room available for that task even if the original task is no longer visible in the live task source.
 
-or open:
+This makes the feedback history more stable and easier to review.
+
+## User Flow
 
 ```txt
-/?demo=1
+User opens the feedback board
+        ↓
+User sees collected AXIS tasks
+        ↓
+User opens one task
+        ↓
+User enters the task feedback room
+        ↓
+User reads the task context
+        ↓
+User submits feedback
+        ↓
+Feedback is saved under that specific task
+        ↓
+The team can review feedback by task
 ```
 
-## Reset Codespaces test data
+## Feedback Flow
 
-```bash
-rm -rf .local-feedback
-```
+Each feedback item is linked to one task.
 
-Also clear browser localStorage if the browser still remembers that you already submitted feedback.
+A feedback item contains:
 
-## Deploy to Netlify
+* Task reference
+* Username
+* Category
+* Message
+* Timestamp
 
-Build settings:
+The task reference is handled automatically by the system.
 
-```txt
-Build command: npm run build
-Publish directory: public
-Functions directory: netlify/functions
-```
+This keeps feedback clean, organized, and attached to the correct task.
 
-Environment variables:
+## Feedback Categories
 
-```env
-USE_LOCAL_STORAGE=0
-USE_MOCK_AXIS=0
-AXIS_API_URL=https://hub.axisrobotics.ai/api/tasks
-AXIS_COOKIE=
-MAX_AXIS_PAGES=6
-ADMIN_KEY=change-this-admin-key
-BLOCK_DUPLICATE_BY_IP=0
-```
+The current feedback categories are intentionally simple:
 
-## Public pages
+* Suggestion
+* Bug
+* Criticism
 
-```txt
-/                 Task board
-/task.html?id=... Task room and submit feedback
-/feedback.html?id=... Full feedback list for one task
-```
+This keeps the form easy to use while still giving the team enough context to understand the type of feedback being submitted.
 
-## Admin pair
+## Contributor Experience
 
-Admin is intentionally not part of the public web. See `admin-pair-seed/README.md` for the next project plan.
+The contributor does not need to understand how the task data is stored.
 
+From the user side, the flow is simple:
 
-## V9 demo purge
+1. Open a task
+2. Read the task details
+3. Write feedback
+4. Submit
 
-V9 defaults to the real AXIS API mode (`USE_MOCK_AXIS=0`). Demo data only appears when you open `/?demo=1` or manually set `USE_MOCK_AXIS=1`. When the real API sync runs, old demo tasks with IDs like `axis-demo-*` are automatically removed from the saved catalog.
+The system is designed to feel like giving feedback inside the task itself, not filling out a separate external report.
+
+## Team Benefit
+
+This board can help the AXIS team:
+
+* Review feedback per task
+* Identify unclear task instructions
+* Track recurring task issues
+* Improve future task quality
+* Separate useful feedback from social noise
+* Keep feedback available even after the task is no longer active
+* Build a more transparent contributor feedback loop
+
+## Design Direction
+
+The interface is designed to be simple, focused, and contributor-friendly.
+
+The main goal is not to overload the page with too many tools, but to create a clean feedback experience around each task.
+
+Key design principles:
+
+* Clear task context
+* Separated feedback form and feedback list
+* Minimal category choices
+* Comfortable dark interface
+* AXIS Robotics visual identity
+* Simple navigation between task list, task room, and feedback history
+
+## Current Scope
+
+This repository focuses on the public contributor-facing feedback board.
+
+The public board includes:
+
+* Task collection
+* Task catalog
+* Task room
+* Feedback submission
+* Feedback preview
+* Full feedback list per task
+* Basic duplicate submission protection
+
+The admin review system is intentionally kept separate so the public experience remains clean and simple.
+
+## Future Improvements
+
+Possible future additions:
+
+* Dedicated admin review dashboard
+* Feedback moderation status
+* Feedback export
+* Search and filtering
+* Contributor authentication
+* Feedback analytics
+* Task quality summary
+* Repeated issue detection
+* Discord or X integration
+
+## Credit
+
+Built by [NPCCRYPTO](https://t.me/NPCKRIPTO).
+
